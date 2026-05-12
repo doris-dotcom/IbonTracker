@@ -24,12 +24,12 @@ jobs:
           playwright install chromium
           playwright install-deps chromium
 
-      - name: Run monitor
+          - name: Run monitor
         env:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           NOTIFY_EMAIL: ${{ secrets.NOTIFY_EMAIL }}
         run: |
-          python src/tracker.py
+          python src/e2e_tracker.py --headless
           python src/email_reporter.py
 
       - name: Upload screenshots
