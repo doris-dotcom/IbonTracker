@@ -25,7 +25,8 @@ def send_daily_report():
             browser = p.chromium.launch(headless=True)
             context = browser.new_context(viewport={"width": 1280, "height": 900})
             page = context.new_page()
-            page.goto("http://localhost:8000", wait_until="networkidle")
+            index_path = os.path.abspath("index.html")
+            page.goto(f"file://{index_path}", wait_until="networkidle")
             # 等待 2 秒確保動畫載入完畢
             page.wait_for_timeout(2000)
             
