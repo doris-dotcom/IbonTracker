@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ibon 影片平台監測系統 - Dashboard</title>
+    <!-- Google Fonts: Inter & Space Grotesk -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Modern Premium Dark CSS Theme with Glassmorphism */
+        :root {
+            --bg-base: #080c14;
+            --bg-surface: rgba(16, 22, 37, 0.7);
+            --bg-surface-hover: rgba(22, 32, 54, 0.85);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-highlight: rgba(99, 102, 241, 0.3);
+            
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            
+            --accent-primary: #6366f1; /* Indigo */
+            --accent-primary-glow: rgba(99, 102, 241, 0.4);
+            
+            --status-success: #10b981; /* Cyber Emerald */
+            --status-success-glow: rgba(16, 185, 129, 0.3);
+            --status-fail: #ef4444; /* Neon Coral */
+            --status-fail-glow: rgba(239, 68, 68, 0.3);
+            --status-warning: #f59e0b; /* Amber */
+            --status-warning-glow: rgba(245, 158, 11, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%);
+            background-attachment: fixed;
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+        }
+
+        /* Container & Layout */
+        .dashboard-container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Header Section */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+        }
+
+        .brand-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .brand-logo {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--accent-primary), #4f46e5);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px var(--accent-primary-glow);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: -1px;
+        }
+
+        .brand-title h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+            background: linear-gradient(to right, #ffffff, #c7d2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-title p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .timestamp {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timestamp-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--status-success);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--status-success);
+            animation: pulse 2s infinite;
+        }
+
+        .btn-refresh {
+            background: linear-gradient(135deg, var(--accent-primary), #4f46e5);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--accent-primary-glow);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-refresh:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+        }
+
+        .btn-refresh:active {
+            transform: translateY(0);
+        }
+
+        /* 1. Top Status Summary Cards */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .summary-card {
+            background: var(--bg-surface);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .summary-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .card-total::before { background: var(--accent-primary); }
+        .card-success::before { background: var(--status-success); }
+        .card-fail::before { background: var(--status-fail); }
+
+        .card-info h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--text-primary);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .card-total .card-icon {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--accent-primary);
+        }
+
+        .card-success .card-icon {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--status-success);
+        }
+
+        .card-fail .card-icon {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--status-fail);
+        }
+
+        /* Row Layout: API and UI Panels */
+        .main-panel-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .main-panel-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* General Panel styling */
+        .panel {
+            background: var(--bg-surface);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .panel-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .panel-badge {
+            font-size: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        /* API Status List styling */
+        .api-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .api-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+
+        .api-item:hover {
+            background: var(--bg-surface-hover);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .api-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            position: relative;
+        }
+
+        .status-dot::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            transform: scale(1);
+            animation: pulse-dot 2s infinite;
+        }
+
+        .dot-online {
+            background-color: var(--status-success);
+        }
+        .dot-online::after {
+            box-shadow: 0 0 8px var(--status-success);
+        }
+
+        .dot-offline {
+            background-color: var(--status-fail);
+        }
+        .dot-offline::after {
+            box-shadow: 0 0 8px var(--status-fail);
+        }
+
+        .dot-slow {
+            background-color: var(--status-warning);
+        }
+        .dot-slow::after {
+            box-shadow: 0 0 8px var(--status-warning);
+        }
+
+        .api-name {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .api-method {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .method-get { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
+        .method-post { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+
+        .api-stats {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .latency-bar {
+            width: 60px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .latency-fill {
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        .latency-fill-fast { background: var(--status-success); width: 25%; }
+        .latency-fill-normal { background: var(--accent-primary); width: 60%; }
+        .latency-fill-slow { background: var(--status-warning); width: 90%; }
+
+        .api-latency {
+            font-size: 0.85rem;
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--text-secondary);
+            text-align: right;
+            min-width: 60px;
+        }
+
+        /* Playwright Steps list */
+        .step-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+        }
+
+        .step-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 0.85rem 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            transition: all 0.2s ease;
+        }
+
+        .step-item:hover {
+            background: var(--bg-surface-hover);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .step-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .step-title-box {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .step-num {
+            background: rgba(99, 102, 241, 0.15);
+            color: #a5b4fc;
+            font-weight: 700;
+            font-size: 0.75rem;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .step-title {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .step-status {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .step-pass {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--status-success);
+        }
+
+        .step-fail {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--status-fail);
+            animation: flash-red 1.5s infinite alternate;
+        }
+
+        .step-pending {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+        }
+
+        .step-running {
+            background: rgba(99, 102, 241, 0.15);
+            color: #a5b4fc;
+            animation: pulse 1s infinite;
+        }
+
+        .step-details-text {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-left: 1.8rem;
+            line-height: 1.4;
+        }
+
+        .step-error-box {
+            background: rgba(239, 68, 68, 0.08);
+            border-left: 3px solid var(--status-fail);
+            padding: 0.6rem;
+            border-radius: 0 6px 6px 0;
+            margin-top: 0.25rem;
+            margin-left: 1.8rem;
+            font-family: 'SFMono-Regular', Consolas, monospace;
+            font-size: 0.75rem;
+            color: #fca5a5;
+            word-break: break-all;
+        }
+
+        /* Bottom History Logs Table */
+        .history-panel {
+            margin-top: 0.5rem;
+        }
+
+        .table-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-input {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem 0.5rem 2.2rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            width: 260px;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 0 10px rgba(99, 102, 241, 0.15);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--text-secondary);
+            font-weight: 600;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.015);
+        }
+
+        .text-mono {
+            font-family: 'Space Grotesk', 'SFMono-Regular', Consolas, monospace;
+            font-size: 0.85rem;
+        }
+
+        .badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .pill-success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--status-success);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .pill-fail {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--status-fail);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.75; }
+        }
+
+        @keyframes pulse-dot {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5);
+                opacity: 1;
+            }
+            70% {
+                transform: scale(2.2);
+                box-shadow: 0 0 0 6px rgba(255, 255, 255, 0);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes flash-red {
+            from { background-color: rgba(239, 68, 68, 0.05); }
+            to { background-color: rgba(239, 68, 68, 0.25); }
+        }
+
+        /* Rotating spinner */
+        .spinner {
+            animation: spin 1s linear infinite;
+        }
+
+        /* Error Alert Banner */
+        .error-banner {
+            background: rgba(239, 68, 68, 0.08);
+            border: 1px solid rgba(239, 68, 68, 0.25);
+            border-left: 5px solid var(--status-fail);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+            animation: flash-red-banner 2.5s infinite alternate;
+        }
+
+        .error-banner-content {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .error-banner-icon {
+            font-size: 1.4rem;
+        }
+
+        .error-banner-text h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #fca5a5;
+            margin-bottom: 2px;
+        }
+
+        .error-banner-text p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Pagination Controls styles */
+        .pagination-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        .btn-page {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+            border-radius: 4px;
+        }
+
+        .btn-page:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--accent-primary);
+        }
+
+        .btn-page:disabled {
+            opacity: 0.25;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header>
+            <div class="brand-section">
+                <div class="brand-logo">ib</div>
+                <div class="brand-title">
+                    <h1>ibon 影片監測系統</h1>
+                    <p>ibon x OVideo AI 轉片自動化監測控制台</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="timestamp">
+                    <span class="timestamp-dot"></span>
+                    <span>最後監測時間: <span id="current-time">尚未執行</span></span>
+                </div>
+                <button class="btn-refresh" onclick="triggerLocalScan()">
+                    <svg id="refresh-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 15.89M21 20v-5h-.581"></path>
+                    </svg>
+                    <span>即時檢測</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Dynamic Warning Banner for failure -->
+        <div id="global-alert-banner" style="display: none; margin-bottom: 0.5rem;"></div>
+
+        <!-- 1. Top Status Summary Cards -->
+        <section class="summary-grid">
+            <div class="summary-card card-total">
+                <div class="card-info">
+                    <h3>總檢查次數</h3>
+                    <div class="card-number" id="stat-total">0</div>
+                </div>
+                <div class="card-icon">📊</div>
+            </div>
+            <div class="summary-card card-success">
+                <div class="card-info">
+                    <h3>自動化測試通過</h3>
+                    <div class="card-number" id="stat-success">0</div>
+                </div>
+                <div class="card-icon">✔️</div>
+            </div>
+            <div class="summary-card card-fail">
+                <div class="card-info">
+                    <h3>偵測到異常/中斷</h3>
+                    <div class="card-number" id="stat-fail">0</div>
+                </div>
+                <div class="card-icon">❌</div>
+            </div>
+        </section>
+
+        <!-- Main Panels: Split Grid (API list & Playwright logs) -->
+        <div class="main-panel-grid">
+            
+            <!-- 2. API Status List -->
+            <section class="panel">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <span>🔌 建議監測之 API 健康度</span>
+                    </div>
+                    <span class="panel-badge">API Gateway</span>
+                </div>
+                
+                <div class="api-list" id="api-container">
+                    <!-- Dynamic rendering will fill this -->
+                </div>
+            </section>
+
+            <!-- 3. Playwright UI Test Results -->
+            <section class="panel">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <span>🎭 E2E 監測步驟</span>
+                    </div>
+                    <span class="panel-badge">E2E Flow</span>
+                </div>
+
+                <div class="step-list" id="step-container">
+                    <!-- Dynamic rendering will fill this -->
+                </div>
+            </section>
+        </div>
+
+        <!-- 4. Bottom History Logs Table -->
+        <section class="panel history-panel">
+            <div class="panel-header" style="border-bottom: none; padding-bottom: 0;">
+                <div class="panel-title">
+                    <span>📜 自動化監測歷史日誌</span>
+                </div>
+                <div class="table-controls" style="display: flex; align-items: center; gap: 1rem;">
+                    <!-- 💡 Pagination Controls -->
+                    <div class="pagination-controls">
+                        <button class="btn-page" id="btn-prev-page" onclick="prevPage()">◀</button>
+                        <span id="page-indicator" style="font-size: 0.8rem; color: var(--text-secondary); font-family: 'Space Grotesk', monospace; font-weight: 500;">Page 1/1</span>
+                        <button class="btn-page" id="btn-next-page" onclick="nextPage()">▶</button>
+                    </div>
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" class="search-input" id="log-search" placeholder="搜尋日誌..." onkeyup="filterTable()">
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table id="history-table">
+                    <thead>
+                        <tr>
+                            <th>檢測時間</th>
+                            <th>監測編號</th>
+                            <th>API Gateway 狀態</th>
+                            <th>Playwright 步驟數</th>
+                            <th>主機資源負載</th>
+                            <th>檢測結果</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-tbody">
+                        <!-- Dynamic rendering will fill this -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer>
+            <p>ibon 影片平台監測控制台 &copy; 2026 • 雲端極速系統</p>
+        </footer>
+    </div>
+
+    <!-- 💡 實時數據 JavaScript 將於下方 DOMContentLoaded 處動態載入，以加入時間戳記防止快取 -->
+
+    <!-- Dashboard Core Interactivity & Render Scripts -->
+    <script>
+        // 1. Fallback Mock Data in case config/data.js hasn't been generated yet
+        const defaultMockData = {
+            "last_run": "尚未執行任何檢測",
+            "total_checks": 0,
+            "success_checks": 0,
+            "fail_checks": 0,
+            "apis": [
+                {"name": "ibon 影片推廣首頁", "method": "GET", "url": "print.ibon.com.tw/promoVideo", "status": "offline", "latency": "尚未檢測"},
+                {"name": "ibon 轉跳 OVideo 憑證驗證 API", "method": "POST", "url": "/api/v1/auth/ibon-token", "status": "offline", "latency": "尚未檢測"},
+                {"name": "OVideo 專案與模板載入服務", "method": "GET", "url": "ovideo.tv/api/v1/projects/config", "status": "offline", "latency": "尚未檢測"},
+                {"name": "PPT / PDF 簡報檔案上傳解析器", "method": "POST", "url": "ovideo.tv/api/v1/files/upload", "status": "offline", "latency": "尚未檢測"},
+                {"name": "AI 影片腳本生成服務 (LLM)", "method": "POST", "url": "ovideo.tv/api/v1/ai/generate-script", "status": "offline", "latency": "尚未檢測"}
+            ],
+            "steps": [
+                {"num": 1, "name": "步驟 1 - 開啟 ibon 首頁", "status": "Pending", "desc": "導航至 https://print.ibon.com.tw/promoVideo 並驗證頁面成功加載。", "error": ""},
+                {"num": 2, "name": "步驟 2 - 點擊立即體驗", "status": "Pending", "desc": "自動定位並點擊網頁中的「立即體驗 AI 影片轉換」按鈕。", "error": ""},
+                {"num": 3, "name": "步驟 3 - 勾選同意條款", "status": "Pending", "desc": "自動勾選「我已閱讀並同意上述說明」Checkbox 選項。", "error": ""},
+                {"num": 4, "name": "步驟 4 - 跳轉至 OVideo", "status": "Pending", "desc": "點擊「同意並前往」按鈕，觸發認證 handshake API 且成功攔截新分頁開啟跳轉。", "error": ""},
+                {"num": 5, "name": "步驟 5 - 點擊開始製作", "status": "Pending", "desc": "於跳轉後之 OVideo 頁面點擊「開始製作影片」按鈕，成功進入工作區。", "error": ""},
+                {"num": 6, "name": "步驟 6 - 上傳測試簡報", "status": "Pending", "desc": "上傳模擬測試用簡報檔案並填入電子郵件，點擊下一步開始解析。", "error": ""},
+                {"num": 7, "name": "步驟 7 - 驗證腳本生成", "status": "Pending", "desc": "檢測專案開啟狀態，確認 AI 腳本已成功解析並完整顯示於編輯畫面。 (監測通過指標)", "error": ""}
+            ],
+            "history": []
+        };
+
+        // 2. Render core function
+        function renderDashboard(data) {
+            // Update time and stats
+            document.getElementById('current-time').textContent = data.last_run;
+            document.getElementById('stat-total').textContent = data.total_checks;
+            document.getElementById('stat-success').textContent = data.success_checks;
+            document.getElementById('stat-fail').textContent = data.fail_checks;
+
+            // Render APIs
+            const apiContainer = document.getElementById('api-container');
+            apiContainer.innerHTML = '';
+            data.apis.forEach(api => {
+                let dotClass = 'dot-online';
+                let latencyClass = 'latency-fill-fast';
+                let msVal = parseInt(api.latency);
+                if (api.latency.endsWith(' s')) {
+                    msVal = parseFloat(api.latency) * 1000;
+                }
+                
+                if (api.status === 'offline' || api.latency.includes('TIMEOUT')) {
+                    dotClass = 'dot-offline';
+                    latencyClass = '';
+                } else if (msVal > 500) {
+                    dotClass = 'dot-slow';
+                    latencyClass = 'latency-fill-slow';
+                } else if (msVal > 100) {
+                    dotClass = 'dot-online';
+                    latencyClass = 'latency-fill-normal';
+                }
+
+                const apiItem = document.createElement('div');
+                apiItem.className = 'api-item';
+                apiItem.innerHTML = `
+                    <div class="api-info">
+                        <span class="status-dot ${dotClass}"></span>
+                        <div>
+                            <span class="api-name">${api.name}</span>
+                            <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 2px;">
+                                <span class="api-method ${api.method.toLowerCase() === 'get' ? 'method-get' : 'method-post'}">${api.method}</span> ${api.url}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="api-stats">
+                        <div class="latency-bar">
+                            <div class="latency-fill ${latencyClass}" style="width: ${api.status === 'offline' ? '0' : (msVal > 1000 ? '100%' : (msVal/10) + '%')}"></div>
+                        </div>
+                        <span class="api-latency" style="${api.status === 'offline' ? 'color: var(--status-fail);' : ''}">${api.latency}</span>
+                    </div>
+                `;
+                apiContainer.appendChild(apiItem);
+            });
+
+            // Render Steps
+            const stepContainer = document.getElementById('step-container');
+            stepContainer.innerHTML = '';
+            data.steps.forEach(step => {
+                let statusClass = 'step-pending';
+                if (step.status === 'Pass') statusClass = 'step-pass';
+                else if (step.status === 'Fail') statusClass = 'step-fail';
+                else if (step.status === 'Running') statusClass = 'step-running';
+
+                const stepItem = document.createElement('div');
+                stepItem.className = 'step-item';
+                stepItem.innerHTML = `
+                    <div class="step-header">
+                        <div class="step-title-box">
+                            <span class="step-num">${step.num}</span>
+                            <span class="step-title">${step.name}</span>
+                        </div>
+                        <span class="step-status ${statusClass}">${step.status}</span>
+                    </div>
+                    <div class="step-details-text">
+                        ${step.desc}
+                    </div>
+                    ${step.error ? `<div class="step-error-box">Error: ${step.error}</div>` : ''}
+                `;
+                stepContainer.appendChild(stepItem);
+            });
+
+            // 💡 Show dynamic alert banner if latest run failed
+            const globalBanner = document.getElementById('global-alert-banner');
+            const latestRun = data.history[0];
+            
+            if (latestRun && latestRun.result === 'fail') {
+                globalBanner.style.display = 'block';
+                globalBanner.innerHTML = `
+                    <div class="error-banner">
+                        <div class="error-banner-content">
+                            <span class="error-banner-icon">⚠️</span>
+                            <div class="error-banner-text">
+                                <h4>最近一次自動化檢測偵測到異常中斷</h4>
+                                <p><strong>時間：</strong>${latestRun.time} &nbsp;|&nbsp; <strong>原因：</strong><span style="color: #fecaca; font-weight: 500;">${latestRun.fail_reason || "執行中斷或超時"}</span></p>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            可向下捲動查看紅字標記之步驟詳細 Log
+                        </div>
+                    </div>
+                `;
+            } else {
+                globalBanner.style.display = 'none';
+                globalBanner.innerHTML = '';
+            }
+
+            // 儲存全域資料並渲染分頁表格
+            globalHistoryData = data.history || [];
+            currentPage = 1;
+            activeHistoryFiltered = null;
+            renderHistoryTable();
+        }
+
+        // --- 全域分頁變數 ---
+        let currentPage = 1;
+        const itemsPerPage = 5;
+        let globalHistoryData = [];
+        let activeHistoryFiltered = null;
+
+        // 渲染分頁歷史紀錄表格
+        function renderHistoryTable() {
+            const historyToRender = activeHistoryFiltered || globalHistoryData;
+            const historyBody = document.getElementById('history-tbody');
+            historyBody.innerHTML = '';
+            
+            const totalItems = historyToRender.length;
+            const totalPages = Math.max(1, Math.ceil(totalItems / itemsPerPage));
+            
+            // 校正目前頁數
+            if (currentPage > totalPages) currentPage = totalPages;
+            if (currentPage < 1) currentPage = 1;
+            
+            // 更新頁數顯示
+            document.getElementById('page-indicator').textContent = `Page ${currentPage}/${totalPages}`;
+            
+            // 啟用/停用按鈕
+            document.getElementById('btn-prev-page').disabled = (currentPage === 1);
+            document.getElementById('btn-next-page').disabled = (currentPage === totalPages);
+
+            if (totalItems === 0) {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td colspan="6" style="text-align: center; color: var(--text-secondary); padding: 3rem 1rem;">
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📊</div>
+                        <div>目前尚無符合的監測紀錄</div>
+                    </td>
+                `;
+                historyBody.appendChild(tr);
+                return;
+            }
+            
+            // 計算分頁範圍
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
+            const pageItems = historyToRender.slice(startIndex, endIndex);
+            
+            pageItems.forEach(log => {
+                const tr = document.createElement('tr');
+                const isSuccess = log.result === 'success';
+                
+                let stepsHTML = log.steps;
+                if (log.fail_reason) {
+                    stepsHTML += `<div style="font-size: 0.75rem; color: #fca5a5; margin-top: 4px; line-height: 1.3;">原因: ${log.fail_reason}</div>`;
+                }
+
+                tr.innerHTML = `
+                    <td class="text-mono">${log.time}</td>
+                    <td class="text-mono">${log.id}</td>
+                    <td style="${log.api_status.includes('TIMEOUT') || log.api_status.includes('SLOW') ? 'color: var(--status-warning);' : ''}">${log.api_status}</td>
+                    <td style="${log.steps.includes('失敗') || log.steps.includes('異常') ? 'color: var(--status-fail);' : ''}">${stepsHTML}</td>
+                    <td class="text-mono">${log.load}</td>
+                    <td><span class="badge-pill ${isSuccess ? 'pill-success' : 'pill-fail'}">${isSuccess ? '✔️ 正常通過' : '❌ 檢測異常'}</span></td>
+                `;
+                historyBody.appendChild(tr);
+            });
+        }
+
+        // 上一頁
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                renderHistoryTable();
+            }
+        }
+
+        // 下一頁
+        function nextPage() {
+            const historyToRender = activeHistoryFiltered || globalHistoryData;
+            const totalPages = Math.ceil(historyToRender.length / itemsPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderHistoryTable();
+            }
+        }
+
+        // 搜尋過濾功能 (搭配分頁)
+        function filterTable() {
+            const query = document.getElementById('log-search').value.toLowerCase().trim();
+            if (query === '') {
+                activeHistoryFiltered = null;
+            } else {
+                activeHistoryFiltered = globalHistoryData.filter(log => {
+                    const timeMatch = log.time.toLowerCase().includes(query);
+                    const idMatch = log.id.toLowerCase().includes(query);
+                    const apiMatch = log.api_status.toLowerCase().includes(query);
+                    const stepsMatch = log.steps.toLowerCase().includes(query);
+                    const loadMatch = log.load.toLowerCase().includes(query);
+                    const reasonMatch = log.fail_reason ? log.fail_reason.toLowerCase().includes(query) : false;
+                    return timeMatch || idMatch || apiMatch || stepsMatch || loadMatch || reasonMatch;
+                });
+            }
+            currentPage = 1; // 重設回第一頁
+            renderHistoryTable();
+        }
+
+        // 4. Manual Refresh & Live E2E Scan Button
+        function triggerLocalScan() {
+            const refreshBtn = document.querySelector('.btn-refresh');
+            const refreshIcon = document.getElementById('refresh-icon');
+            const btnText = refreshBtn.querySelector('span');
+            
+            // Check if we are running through the Python Web Server or raw file:// URL
+            const isLocalServer = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            
+            if (!isLocalServer) {
+                alert("💡 提示：此按鈕目前處於靜態檔案預覽模式（file://）。\n\n如要開通「網頁點擊一鍵即時檢測」功能，請：\n1. 在終端機執行：python src/tracker.py\n2. 在瀏覽器打開：http://localhost:8000\n\n啟動後，按此按鈕將會直接在後台執行 Playwright 測試、即時跑完整個流程並自動更新此頁面！");
+                return;
+            }
+
+            refreshIcon.classList.add('spinner');
+            refreshBtn.disabled = true;
+            btnText.textContent = "執行 E2E 檢測中 (約 30s)...";
+
+            fetch('/api/scan', { method: 'POST' })
+                .then(response => {
+                    if (!response.ok) throw new Error('檢測執行失敗');
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('✅ 即時檢測完成:', data);
+                    // 重新載入頁面，展示最新出爐的檢測資料！
+                    window.location.reload();
+                })
+                .catch(err => {
+                    console.error('❌ 即時檢測出錯:', err);
+                    alert("❌ 即時檢測執行失敗！請確認本機 Python 背景伺服器是否正常運作。");
+                    refreshIcon.classList.remove('spinner');
+                    refreshBtn.disabled = false;
+                    btnText.textContent = "即時檢測";
+                });
+        }
+
+        // 💡 啟動初始化渲染 (動態載入 data.js，加上時間戳記以徹底防止瀏覽器 Cache 快取舊資料)
+        window.addEventListener('DOMContentLoaded', () => {
+            const script = document.createElement('script');
+            script.src = 'config/data.js?t=' + new Date().getTime();
+            script.onload = () => {
+                if (window.monitorData) {
+                    console.log('✅ 成功載入本機 Playwright 實時數據！');
+                    renderDashboard(window.monitorData);
+                } else {
+                    console.log('⚠️ 數據格式不正確，載入預設 Demo 模擬數據。');
+                    renderDashboard(defaultMockData);
+                }
+            };
+            script.onerror = () => {
+                console.log('⚠️ 尚未偵測到本機 data.js，使用預設 Demo 模擬數據。');
+                renderDashboard(defaultMockData);
+            };
+            document.head.appendChild(script);
+        });
+    </script>
+</body>
+</html>

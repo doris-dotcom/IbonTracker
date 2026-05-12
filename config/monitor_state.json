@@ -1,0 +1,137 @@
+[
+  {
+    "time": "2026-05-12 12:01:35",
+    "id": "#TS-58495",
+    "api_status": "5 / 5 在線",
+    "steps": "Step 7/7 完成",
+    "fail_reason": "",
+    "load": "CPU 15% | RAM 46%",
+    "result": "success"
+  },
+  {
+    "time": "2026-05-12 09:01:44",
+    "id": "#TS-47704",
+    "api_status": "5 / 5 在線",
+    "steps": "Step 7/7 完成",
+    "fail_reason": "",
+    "load": "CPU 15% | RAM 46%",
+    "result": "success"
+  },
+  {
+    "time": "2026-05-11 17:37:35",
+    "id": "#TS-92255",
+    "api_status": "5 / 5 在線",
+    "steps": "Step 0/7 完成 (步驟 1 失敗)",
+    "fail_reason": "【步驟 1 - 開啟 ibon 首頁】Page.goto: net::ERR_INTERNET_DISCONNECTED at https://print.ibon.com.tw/promoVideo",
+    "load": "CPU 15% | RAM 46%",
+    "result": "fail"
+  },
+  {
+    "time": "2026-05-11 12:01:05",
+    "id": "#TS-72065",
+    "api_status": "5 / 5 在線",
+    "steps": "Step 7/7 完成",
+    "fail_reason": "",
+    "load": "CPU 15% | RAM 46%",
+    "result": "success"
+  },
+  {
+    "time": "2026-05-11 09:08:13",
+    "id": "#TS-61693",
+    "api_status": "5 / 5 在線",
+    "steps": "Step 0/7 完成 (步驟 1 失敗)",
+    "fail_reason": "【步驟 1 - 開啟 ibon 首頁】Page.goto: net::ERR_INTERNET_DISCONNECTED at https://print.ibon.com.tw/promoVideo",
+    "load": "CPU 15% | RAM 46%",
+    "result": "fail"
+  },
+  {
+    "time": "2026-05-10 17:11:21",
+    "id": "#TS-04281",
+    "api_status": "5 / 5 在線",
+    "steps": "Step 0/7 完成 (步驟 1 失敗)",
+    "fail_reason": "【步驟 1 - 開啟 ibon 首頁】等待元素超時，網頁加載過慢",
+    "load": "CPU 15% | RAM 46%",
+    "result": "fail"
+  },
+  {
+    "time": "2026-05-10 12:27:17",
+    "id": "#TS-87237",
+    "api_status": "5 / 5 在線",
+    "steps": "Step 6/7 完成 (步驟 7 失敗)",
+    "fail_reason": "【步驟 7 - 驗證腳本生成】等待元素超時，網頁加載過慢",
+    "load": "CPU 15% | RAM 46%",
+    "result": "fail"
+  },
+  {
+    "time": "2026-05-10 09:20:04",
+    "id": "#TS-76004",
+    "api_status": "5 / 5 在線",
+    "steps": "Step 6/7 完成 (步驟 7 失敗)",
+    "fail_reason": "【步驟 7 - 驗證腳本生成】等待元素超時，網頁加載過慢",
+    "load": "CPU 15% | RAM 46%",
+    "result": "fail"
+  },
+  {
+    "time": "2026-05-09 17:02:19",
+    "id": "#TS-17339",
+    "api_status": "5 / 5 在線",
+    "steps": "Step 7/7 完成",
+    "fail_reason": "",
+    "load": "CPU 15% | RAM 46%",
+    "result": "success"
+  },
+  {
+    "time": "2026-05-09 13:01:29",
+    "id": "#TS-02889",
+    "api_status": "5 / 5 在線",
+    "steps": "Step 7/7 完成",
+    "fail_reason": "",
+    "load": "CPU 15% | RAM 46%",
+    "result": "success"
+  },
+  {
+    "time": "2026-05-09 12:10:48",
+    "id": "#TS-99848",
+    "api_status": "5 / 5 在線",
+    "steps": "Step 0/7 完成 (步驟 1 失敗)",
+    "fail_reason": "【步驟 1 - 開啟 ibon 首頁】等待元素超時，網頁加載過慢",
+    "load": "CPU 15% | RAM 46%",
+    "result": "fail"
+  },
+  {
+    "time": "2026-05-09 11:03:27",
+    "id": "#TS-95807",
+    "api_status": "5 / 5 在線",
+    "steps": "Step 7/7 完成",
+    "fail_reason": "",
+    "load": "CPU 15% | RAM 46%",
+    "result": "success"
+  },
+  {
+    "time": "2026-05-08 17:03:18",
+    "id": "#TS-30998",
+    "api_status": "5 / 5 在線",
+    "steps": "Step 6/7 完成 (步驟 7 失敗)",
+    "fail_reason": "【步驟 7 - 驗證腳本生成】等待元素超時，網頁加載過慢",
+    "load": "CPU 15% | RAM 46%",
+    "result": "fail"
+  },
+  {
+    "time": "2026-05-08 12:03:25",
+    "id": "#TS-13005",
+    "api_status": "5 / 5 在線",
+    "steps": "Step 6/7 完成 (步驟 7 失敗)",
+    "fail_reason": "【步驟 7 - 驗證腳本生成】等待元素超時，網頁加載過慢",
+    "load": "CPU 15% | RAM 46%",
+    "result": "fail"
+  },
+  {
+    "time": "2026-05-08 09:50:10",
+    "id": "#TS-05010",
+    "api_status": "5 / 5 在線",
+    "steps": "Step 6/7 完成 (步驟 7 失敗)",
+    "fail_reason": "【步驟 7 - 驗證腳本生成】AI 腳本生成異常: 腳本內容仍為預設佔位符【\"第 1 頁內容\"】",
+    "load": "CPU 15% | RAM 46%",
+    "result": "fail"
+  }
+]

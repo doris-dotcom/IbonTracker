@@ -1,0 +1,23 @@
+{
+  "project_name": "IbonTracker",
+  "version": "0.1.0",
+  "targets": [
+    {
+      "name": "ibon_video_platform",
+      "url": "",
+      "enabled": true
+    }
+  ],
+  "check_interval_seconds": 300,
+  "notification": {
+    "method": "slack",
+    "slack_webhook_url": "",
+    "line_notify_token": "",
+    "email": ""
+  },
+  "logging": {
+    "level": "INFO",
+    "log_to_file": true,
+    "log_path": "logs/tracker.log"
+  }
+}
