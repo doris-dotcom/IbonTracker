@@ -29,7 +29,8 @@ jobs:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           NOTIFY_EMAIL: ${{ secrets.NOTIFY_EMAIL }}
         run: |
-          python src/register_service.py
+          python src/tracker.py
+          python src/email_reporter.py
 
       - name: Upload screenshots
         if: always()
