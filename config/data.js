@@ -1,22 +1,22 @@
 window.monitorData = {
-  "last_run": "2026-05-12 10:13:26",
-  "total_checks": 16,
+  "last_run": "2026-05-12 15:43:30",
+  "total_checks": 17,
   "success_checks": 7,
-  "fail_checks": 9,
+  "fail_checks": 10,
   "apis": [
     {
       "name": "ibon 影片推廣首頁",
       "method": "GET",
       "url": "print.ibon.com.tw/promoVideo",
       "status": "online",
-      "latency": "4.47 s"
+      "latency": "3.35 s"
     },
     {
       "name": "ibon 轉跳 OVideo 憑證驗證 API",
       "method": "POST",
       "url": "/api/v1/auth/ibon-token",
       "status": "online",
-      "latency": "2.53 s"
+      "latency": "1.75 s"
     },
     {
       "name": "OVideo 專案與模板載入服務",
@@ -37,7 +37,7 @@ window.monitorData = {
       "method": "POST",
       "url": "ovideo.tv/api/v1/ai/generate-script",
       "status": "online",
-      "latency": "120.35 s"
+      "latency": "820 ms"
     }
   ],
   "steps": [
@@ -86,12 +86,21 @@ window.monitorData = {
     {
       "num": 7,
       "name": "步驟 7 - 驗證腳本生成",
-      "status": "Pass",
+      "status": "Fail",
       "desc": "檢測專案開啟狀態，確認 AI 腳本已成功解析並完整顯示於編輯畫面。（監測通過指標）",
-      "error": ""
+      "error": "Page.wait_for_selector: Timeout 180000ms exceeded.\nCall log:\n  - waiting for locator(\"textarea\") to be visible\n"
     }
   ],
   "history": [
+    {
+      "time": "2026-05-12 15:43:30",
+      "id": "#TS-00610",
+      "api_status": "5 / 5 在線",
+      "steps": "Step 6/7 完成 (步驟 7 失敗)",
+      "fail_reason": "【步驟 7 - 驗證腳本生成】等待元素超時，網頁加載過慢",
+      "load": "CPU 15% | RAM 46%",
+      "result": "fail"
+    },
     {
       "time": "2026-05-12 10:13:26",
       "id": "#TS-80806",
