@@ -24,7 +24,7 @@ jobs:
           playwright install chromium
           playwright install-deps chromium
 
-          - name: Run monitor
+      - name: Run monitor
         env:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           NOTIFY_EMAIL: ${{ secrets.NOTIFY_EMAIL }}
