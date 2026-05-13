@@ -1,5 +1,14 @@
 [
   {
+    "time": "2026-05-13 07:50:03",
+    "id": "#TS-58603",
+    "api_status": "5 / 5 在線",
+    "steps": "Step 7/7 完成",
+    "fail_reason": "",
+    "load": "CPU 15% | RAM 46%",
+    "result": "success"
+  },
+  {
     "time": "2026-05-12 23:56:04",
     "id": "#TS-30164",
     "api_status": "5 / 5 在線",
