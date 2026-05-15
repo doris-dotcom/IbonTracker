@@ -1,7 +1,7 @@
 window.monitorData = {
-  "last_run": "2026-05-15 12:56:22",
-  "total_checks": 24,
-  "success_checks": 13,
+  "last_run": "2026-05-15 19:26:56",
+  "total_checks": 25,
+  "success_checks": 14,
   "fail_checks": 11,
   "apis": [
     {
@@ -9,14 +9,14 @@ window.monitorData = {
       "method": "GET",
       "url": "print.ibon.com.tw/promoVideo",
       "status": "online",
-      "latency": "4.18 s"
+      "latency": "6.80 s"
     },
     {
       "name": "ibon 轉跳 OVideo 憑證驗證 API",
       "method": "POST",
       "url": "/api/v1/auth/ibon-token",
       "status": "online",
-      "latency": "120 ms"
+      "latency": "2.07 s"
     },
     {
       "name": "OVideo 專案與模板載入服務",
@@ -37,7 +37,7 @@ window.monitorData = {
       "method": "POST",
       "url": "ovideo.tv/api/v1/ai/generate-script",
       "status": "online",
-      "latency": "820 ms"
+      "latency": "30.96 s"
     }
   ],
   "steps": [
@@ -58,40 +58,49 @@ window.monitorData = {
     {
       "num": 3,
       "name": "步驟 3 - 勾選同意條款",
-      "status": "Fail",
+      "status": "Pass",
       "desc": "自動勾選「我已閱讀並同意上述說明」Checkbox 選項。",
-      "error": "無法定位到同意聲明勾選框"
+      "error": ""
     },
     {
       "num": 4,
       "name": "步驟 4 - 跳轉至 OVideo",
-      "status": "Pending",
+      "status": "Pass",
       "desc": "點擊「同意並前往」按鈕，觸發認證 handshake API 且成功攔截新分頁開啟跳轉。",
       "error": ""
     },
     {
       "num": 5,
       "name": "步驟 5 - 點擊開始製作",
-      "status": "Pending",
+      "status": "Pass",
       "desc": "於跳轉後之 OVideo 頁面點擊「開始製作影片」按鈕，成功進入工作區。",
       "error": ""
     },
     {
       "num": 6,
       "name": "步驟 6 - 上傳測試簡報",
-      "status": "Pending",
+      "status": "Pass",
       "desc": "上傳測試簡報簡介檔（PDF/PPT）並填入電子郵件，點擊下一步開始解析。",
       "error": ""
     },
     {
       "num": 7,
       "name": "步驟 7 - 驗證腳本生成",
-      "status": "Pending",
+      "status": "Pass",
       "desc": "檢測專案開啟狀態，確認 AI 腳本已成功解析並完整顯示於編輯畫面。（監測通過指標）",
       "error": ""
     }
   ],
   "history": [
+    {
+      "time": "2026-05-15 19:26:56",
+      "id": "#TS-44416",
+      "api_status": "5 / 5 在線",
+      "steps": "Step 7/7 完成",
+      "fail_reason": "",
+      "load": "CPU 15% | RAM 46%",
+      "result": "success"
+    },
     {
       "time": "2026-05-15 12:56:22",
       "id": "#TS-20982",
