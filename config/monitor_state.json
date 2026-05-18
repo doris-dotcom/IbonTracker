@@ -1,5 +1,14 @@
 [
   {
+    "time": "2026-05-18 20:41:30",
+    "id": "#TS-08090",
+    "api_status": "5 / 5 在線",
+    "steps": "Step 7/7 完成",
+    "fail_reason": "",
+    "load": "CPU 15% | RAM 46%",
+    "result": "success"
+  },
+  {
     "time": "2026-05-18 13:13:56",
     "id": "#TS-81236",
     "api_status": "5 / 5 在線",
@@ -257,15 +266,6 @@
     "api_status": "5 / 5 在線",
     "steps": "Step 6/7 完成 (步驟 7 失敗)",
     "fail_reason": "【步驟 7 - 驗證腳本生成】等待元素超時，網頁加載過慢",
-    "load": "CPU 15% | RAM 46%",
-    "result": "fail"
-  },
-  {
-    "time": "2026-05-08 09:50:10",
-    "id": "#TS-05010",
-    "api_status": "5 / 5 在線",
-    "steps": "Step 6/7 完成 (步驟 7 失敗)",
-    "fail_reason": "【步驟 7 - 驗證腳本生成】AI 腳本生成異常: 腳本內容仍為預設佔位符【\"第 1 頁內容\"】",
     "load": "CPU 15% | RAM 46%",
     "result": "fail"
   }
