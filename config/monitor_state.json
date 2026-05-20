@@ -1,5 +1,14 @@
 [
   {
+    "time": "2026-05-20 19:55:31",
+    "id": "#TS-78131",
+    "api_status": "5 / 5 在線",
+    "steps": "Step 7/7 完成",
+    "fail_reason": "",
+    "load": "CPU 15% | RAM 46%",
+    "result": "success"
+  },
+  {
     "time": "2026-05-20 13:11:48",
     "id": "#TS-53908",
     "api_status": "5 / 5 在線",
@@ -259,14 +268,5 @@
     "fail_reason": "",
     "load": "CPU 15% | RAM 46%",
     "result": "success"
-  },
-  {
-    "time": "2026-05-09 12:10:48",
-    "id": "#TS-99848",
-    "api_status": "5 / 5 在線",
-    "steps": "Step 0/7 完成 (步驟 1 失敗)",
-    "fail_reason": "【步驟 1 - 開啟 ibon 首頁】等待元素超時，網頁加載過慢",
-    "load": "CPU 15% | RAM 46%",
-    "result": "fail"
   }
 ]
