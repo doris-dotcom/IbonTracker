@@ -1,5 +1,14 @@
 [
   {
+    "time": "2026-05-23 18:43:18",
+    "id": "#TS-32998",
+    "api_status": "5 / 5 在線",
+    "steps": "Step 7/7 完成",
+    "fail_reason": "",
+    "load": "CPU 15% | RAM 46%",
+    "result": "success"
+  },
+  {
     "time": "2026-05-23 12:48:10",
     "id": "#TS-11690",
     "api_status": "5 / 5 在線",
@@ -259,14 +268,5 @@
     "fail_reason": "",
     "load": "CPU 15% | RAM 46%",
     "result": "success"
-  },
-  {
-    "time": "2026-05-11 09:08:13",
-    "id": "#TS-61693",
-    "api_status": "5 / 5 在線",
-    "steps": "Step 0/7 完成 (步驟 1 失敗)",
-    "fail_reason": "【步驟 1 - 開啟 ibon 首頁】Page.goto: net::ERR_INTERNET_DISCONNECTED at https://print.ibon.com.tw/promoVideo",
-    "load": "CPU 15% | RAM 46%",
-    "result": "fail"
   }
 ]
