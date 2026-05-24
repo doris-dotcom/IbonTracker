@@ -1,5 +1,5 @@
 window.monitorData = {
-  "last_run": "2026-05-23 18:43:18",
+  "last_run": "2026-05-24 13:08:44",
   "total_checks": 30,
   "success_checks": 27,
   "fail_checks": 3,
@@ -9,14 +9,14 @@ window.monitorData = {
       "method": "GET",
       "url": "print.ibon.com.tw/promoVideo",
       "status": "online",
-      "latency": "6.32 s"
+      "latency": "6.57 s"
     },
     {
       "name": "ibon 轉跳 OVideo 憑證驗證 API",
       "method": "POST",
       "url": "/api/v1/auth/ibon-token",
       "status": "online",
-      "latency": "2.54 s"
+      "latency": "2.38 s"
     },
     {
       "name": "OVideo 專案與模板載入服務",
@@ -37,7 +37,7 @@ window.monitorData = {
       "method": "POST",
       "url": "ovideo.tv/api/v1/ai/generate-script",
       "status": "online",
-      "latency": "124.83 s"
+      "latency": "113.75 s"
     }
   ],
   "steps": [
@@ -92,6 +92,15 @@ window.monitorData = {
     }
   ],
   "history": [
+    {
+      "time": "2026-05-24 13:08:44",
+      "id": "#TS-99324",
+      "api_status": "5 / 5 在線",
+      "steps": "Step 7/7 完成",
+      "fail_reason": "",
+      "load": "CPU 15% | RAM 46%",
+      "result": "success"
+    },
     {
       "time": "2026-05-23 18:43:18",
       "id": "#TS-32998",
@@ -352,15 +361,6 @@ window.monitorData = {
       "fail_reason": "【步驟 1 - 開啟 ibon 首頁】Page.goto: net::ERR_INTERNET_DISCONNECTED at https://print.ibon.com.tw/promoVideo",
       "load": "CPU 15% | RAM 46%",
       "result": "fail"
-    },
-    {
-      "time": "2026-05-11 12:01:05",
-      "id": "#TS-72065",
-      "api_status": "5 / 5 在線",
-      "steps": "Step 7/7 完成",
-      "fail_reason": "",
-      "load": "CPU 15% | RAM 46%",
-      "result": "success"
     }
   ]
 };
