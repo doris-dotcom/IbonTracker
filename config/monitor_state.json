@@ -1,5 +1,14 @@
 [
   {
+    "time": "2026-05-26 13:09:34",
+    "id": "#TS-72174",
+    "api_status": "5 / 5 在線",
+    "steps": "Step 7/7 完成",
+    "fail_reason": "",
+    "load": "CPU 15% | RAM 46%",
+    "result": "success"
+  },
+  {
     "time": "2026-05-25 20:39:50",
     "id": "#TS-12790",
     "api_status": "5 / 5 在線",
@@ -259,14 +268,5 @@
     "fail_reason": "【步驟 7 - 驗證腳本生成】等待元素超時，網頁加載過慢",
     "load": "CPU 15% | RAM 46%",
     "result": "fail"
-  },
-  {
-    "time": "2026-05-12 10:13:26",
-    "id": "#TS-80806",
-    "api_status": "5 / 5 在線",
-    "steps": "Step 7/7 完成",
-    "fail_reason": "",
-    "load": "CPU 15% | RAM 46%",
-    "result": "success"
   }
 ]
