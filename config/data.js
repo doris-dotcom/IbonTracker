@@ -1,5 +1,5 @@
 window.monitorData = {
-  "last_run": "2026-05-28 20:38:33",
+  "last_run": "2026-05-29 13:18:34",
   "total_checks": 30,
   "success_checks": 29,
   "fail_checks": 1,
@@ -9,14 +9,14 @@ window.monitorData = {
       "method": "GET",
       "url": "print.ibon.com.tw/promoVideo",
       "status": "online",
-      "latency": "5.10 s"
+      "latency": "6.88 s"
     },
     {
       "name": "ibon 轉跳 OVideo 憑證驗證 API",
       "method": "POST",
       "url": "/api/v1/auth/ibon-token",
       "status": "online",
-      "latency": "1.61 s"
+      "latency": "2.10 s"
     },
     {
       "name": "OVideo 專案與模板載入服務",
@@ -37,7 +37,7 @@ window.monitorData = {
       "method": "POST",
       "url": "ovideo.tv/api/v1/ai/generate-script",
       "status": "online",
-      "latency": "70.09 s"
+      "latency": "33.44 s"
     }
   ],
   "steps": [
@@ -92,6 +92,15 @@ window.monitorData = {
     }
   ],
   "history": [
+    {
+      "time": "2026-05-29 13:18:34",
+      "id": "#TS-31914",
+      "api_status": "5 / 5 在線",
+      "steps": "Step 7/7 完成",
+      "fail_reason": "",
+      "load": "CPU 15% | RAM 46%",
+      "result": "success"
+    },
     {
       "time": "2026-05-28 20:38:33",
       "id": "#TS-71913",
@@ -347,15 +356,6 @@ window.monitorData = {
     {
       "time": "2026-05-14 12:57:22",
       "id": "#TS-34642",
-      "api_status": "5 / 5 在線",
-      "steps": "Step 7/7 完成",
-      "fail_reason": "",
-      "load": "CPU 15% | RAM 46%",
-      "result": "success"
-    },
-    {
-      "time": "2026-05-13 19:39:58",
-      "id": "#TS-72398",
       "api_status": "5 / 5 在線",
       "steps": "Step 7/7 完成",
       "fail_reason": "",
