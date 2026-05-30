@@ -1,5 +1,14 @@
 [
   {
+    "time": "2026-05-30 18:52:19",
+    "id": "#TS-38339",
+    "api_status": "5 / 5 在線",
+    "steps": "Step 7/7 完成",
+    "fail_reason": "",
+    "load": "CPU 15% | RAM 46%",
+    "result": "success"
+  },
+  {
     "time": "2026-05-30 12:57:54",
     "id": "#TS-17074",
     "api_status": "5 / 5 在線",
@@ -259,14 +268,5 @@
     "fail_reason": "",
     "load": "CPU 15% | RAM 46%",
     "result": "success"
-  },
-  {
-    "time": "2026-05-15 12:56:22",
-    "id": "#TS-20982",
-    "api_status": "5 / 5 在線",
-    "steps": "Step 2/7 完成 (步驟 3 失敗)",
-    "fail_reason": "【步驟 3 - 勾選同意條款】無法定位到同意聲明勾選框",
-    "load": "CPU 15% | RAM 46%",
-    "result": "fail"
   }
 ]
