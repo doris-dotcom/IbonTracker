@@ -1,15 +1,15 @@
 window.monitorData = {
-  "last_run": "2026-06-15 14:31:57",
+  "last_run": "2026-06-15 23:22:26",
   "total_checks": 30,
-  "success_checks": 10,
-  "fail_checks": 20,
+  "success_checks": 9,
+  "fail_checks": 21,
   "apis": [
     {
       "name": "ibon 影片推廣首頁",
       "method": "GET",
       "url": "print.ibon.com.tw/promoVideo",
       "status": "online",
-      "latency": "5.43 s"
+      "latency": "5.47 s"
     },
     {
       "name": "ibon 轉跳 OVideo 憑證驗證 API",
@@ -92,6 +92,15 @@ window.monitorData = {
     }
   ],
   "history": [
+    {
+      "time": "2026-06-15 23:22:26",
+      "id": "#TS-36946",
+      "api_status": "5 / 5 在線",
+      "steps": "Step 2/7 完成 (步驟 3 失敗)",
+      "fail_reason": "【步驟 3 - 勾選同意條款】等待元素超時，網頁加載過慢",
+      "load": "CPU 15% | RAM 46%",
+      "result": "fail"
+    },
     {
       "time": "2026-06-15 14:31:57",
       "id": "#TS-05117",
@@ -347,15 +356,6 @@ window.monitorData = {
     {
       "time": "2026-06-01 14:10:49",
       "id": "#TS-94249",
-      "api_status": "5 / 5 在線",
-      "steps": "Step 7/7 完成",
-      "fail_reason": "",
-      "load": "CPU 15% | RAM 46%",
-      "result": "success"
-    },
-    {
-      "time": "2026-05-31 19:05:32",
-      "id": "#TS-25532",
       "api_status": "5 / 5 在線",
       "steps": "Step 7/7 完成",
       "fail_reason": "",
