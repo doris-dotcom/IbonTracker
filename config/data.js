@@ -1,15 +1,15 @@
 window.monitorData = {
-  "last_run": "2026-06-16 18:03:40",
+  "last_run": "2026-06-16 18:17:38",
   "total_checks": 30,
-  "success_checks": 7,
-  "fail_checks": 23,
+  "success_checks": 6,
+  "fail_checks": 24,
   "apis": [
     {
       "name": "ibon 影片推廣首頁",
       "method": "GET",
       "url": "print.ibon.com.tw/promoVideo",
       "status": "online",
-      "latency": "4.89 s"
+      "latency": "4.84 s"
     },
     {
       "name": "ibon 轉跳 OVideo 憑證驗證 API",
@@ -60,7 +60,7 @@ window.monitorData = {
       "name": "步驟 3 - 勾選同意條款",
       "status": "Fail",
       "desc": "自動勾選「我已閱讀並同意上述說明」Checkbox 選項。",
-      "error": "Locator.check: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[type='checkbox']\").first\n    - locator resolved to <input type=\"checkbox\" data-v-0f7422d0=\"\" class=\"base-checkbox__input\"/>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <label data-v-0f7422d0=\"\" data-v-2d2e9651=\"\" class=\"base-checkbox\">…</label> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <label data-v-0f7422d0=\"\" data-v-2d2e9651=\"\" class=\"base-checkbox\">…</label> intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    56 × waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <label data-v-0f7422d0=\"\" data-v-2d2e9651=\"\" class=\"base-checkbox\">…</label> intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n"
+      "error": "無法勾選同意框: Page.wait_for_selector: Timeout 15000ms exceeded.\nCall log:\n  - waiting for locator(\"text=即將前往第三方服務頁面\") to be visible\n"
     },
     {
       "num": 4,
@@ -92,6 +92,15 @@ window.monitorData = {
     }
   ],
   "history": [
+    {
+      "time": "2026-06-16 18:17:38",
+      "id": "#TS-05058",
+      "api_status": "5 / 5 在線",
+      "steps": "Step 2/7 完成 (步驟 3 失敗)",
+      "fail_reason": "【步驟 3 - 勾選同意條款】等待元素超時，網頁加載過慢",
+      "load": "CPU 15% | RAM 46%",
+      "result": "fail"
+    },
     {
       "time": "2026-06-16 18:03:40",
       "id": "#TS-04220",
@@ -347,15 +356,6 @@ window.monitorData = {
     {
       "time": "2026-06-02 20:50:49",
       "id": "#TS-04649",
-      "api_status": "5 / 5 在線",
-      "steps": "Step 7/7 完成",
-      "fail_reason": "",
-      "load": "CPU 15% | RAM 46%",
-      "result": "success"
-    },
-    {
-      "time": "2026-06-02 13:56:38",
-      "id": "#TS-79798",
       "api_status": "5 / 5 在線",
       "steps": "Step 7/7 完成",
       "fail_reason": "",

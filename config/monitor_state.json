@@ -1,5 +1,14 @@
 [
   {
+    "time": "2026-06-16 18:17:38",
+    "id": "#TS-05058",
+    "api_status": "5 / 5 在線",
+    "steps": "Step 2/7 完成 (步驟 3 失敗)",
+    "fail_reason": "【步驟 3 - 勾選同意條款】等待元素超時，網頁加載過慢",
+    "load": "CPU 15% | RAM 46%",
+    "result": "fail"
+  },
+  {
     "time": "2026-06-16 18:03:40",
     "id": "#TS-04220",
     "api_status": "5 / 5 在線",
@@ -254,15 +263,6 @@
   {
     "time": "2026-06-02 20:50:49",
     "id": "#TS-04649",
-    "api_status": "5 / 5 在線",
-    "steps": "Step 7/7 完成",
-    "fail_reason": "",
-    "load": "CPU 15% | RAM 46%",
-    "result": "success"
-  },
-  {
-    "time": "2026-06-02 13:56:38",
-    "id": "#TS-79798",
     "api_status": "5 / 5 在線",
     "steps": "Step 7/7 完成",
     "fail_reason": "",
