@@ -248,19 +248,23 @@ def run_steps_1_to_7():
             # 🟢 [Step 3] 勾選「我已閱讀並同意上述說明」
             # -----------------
             step_statuses[3] = "Running"
-            agree_text_locator = page.locator("text=我已閱讀並同意上述說明").first
-            if agree_text_locator.is_visible(timeout=5000):
+            try:
+                # 先等彈窗標題出現，確認彈窗已完整載入
+                page.wait_for_selector("text=即將前往第三方服務頁面", timeout=15000)
+                # 再等 checkbox 文字出現並點擊
+                agree_text_locator = page.locator("text=我已閱讀並同意上述說明").first
+                agree_text_locator.wait_for(state="visible", timeout=10000)
                 agree_text_locator.click()
                 step_statuses[3] = "Pass"
                 print("✅ [Step 3] 同意框勾選完成！")
-            else:
+            except Exception:
+                # 備用：直接找 checkbox
                 checkbox_locator = page.locator("input[type='checkbox']").first
-                if checkbox_locator.is_visible():
-                    checkbox_locator.check()
-                    step_statuses[3] = "Pass"
-                    print("✅ [Step 3] 同意框勾選完成！")
-                else:
-                    raise Exception("無法定位到同意聲明勾選框")
+                checkbox_locator.wait_for(state="visible", timeout=10000)
+                checkbox_locator.check()
+                step_statuses[3] = "Pass"
+                print("✅ [Step 3] 同意框勾選完成（備用方案）！")
+
             
             # -----------------
             # 🟢 [Step 4] 點擊「同意並前往」按鈕 (另開 OVideo 新視窗)
