@@ -1,6 +1,6 @@
-# IbonTracker
+# IbTracker
 
-ibon 影片平台監測系統 — 自動偵測 ibon 平台的影片上架狀況、API 健康度以及 Playwright E2E UI 整合測試結果，並提供極具現代感的「單頁監測儀表板 (Single Page Dashboard)」。
+ib 影片平台監測系統 — 自動偵測 ib 平台的影片上架狀況、API 健康度以及 Playwright E2E UI 整合測試結果，並提供極具現代感的「單頁監測儀表板 (Single Page Dashboard)」。
 
 ---
 
