@@ -251,19 +251,14 @@ def run_steps_1_to_7():
             try:
                 # 先等彈窗標題出現，確認彈窗已完整載入
                 page.wait_for_selector("text=即將前往第三方服務頁面", timeout=15000)
-                # 再等 checkbox 文字出現並點擊
-                agree_text_locator = page.locator("text=我已閱讀並同意上述說明").first
-                agree_text_locator.wait_for(state="visible", timeout=10000)
-                agree_text_locator.click()
+                # 直接點 label，避免 label 擋住 checkbox 點擊
+                label_locator = page.locator("label.base-checkbox").first
+                label_locator.wait_for(state="visible", timeout=10000)
+                label_locator.click()
                 step_statuses[3] = "Pass"
                 print("✅ [Step 3] 同意框勾選完成！")
-            except Exception:
-                # 備用：直接找 checkbox
-                checkbox_locator = page.locator("input[type='checkbox']").first
-                checkbox_locator.wait_for(state="visible", timeout=10000)
-                checkbox_locator.check()
-                step_statuses[3] = "Pass"
-                print("✅ [Step 3] 同意框勾選完成（備用方案）！")
+            except Exception as e:
+                raise Exception(f"無法勾選同意框: {e}")
 
             
             # -----------------
